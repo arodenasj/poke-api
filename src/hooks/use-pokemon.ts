@@ -39,3 +39,18 @@ export function usePokemonSearch(query: string) {
     enabled: query.length > 1,
   });
 }
+
+// New hook to get filtered Pokemon list by type
+export function useFilteredPokemonList(type: string, limit = 20) {
+  return useQuery({
+    queryKey: ['filteredPokemonList', type, limit],
+    queryFn: async () => {
+      if (type === 'all') {
+        return PokemonService.getPokemonList(limit, 0);
+      } else {
+        return PokemonService.getPokemonByType(type, limit);
+      }
+    },
+    enabled: !!type,
+  });
+}

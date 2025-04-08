@@ -1,24 +1,25 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTypeDetail } from '@/hooks/use-pokemon';
 import { PokemonService } from '@/services/pokemon-service';
 import { Navbar } from '@/components/ui/navbar';
 import { PokemonCard } from '@/components/ui/pokemon-card';
 import { CustomPagination } from '@/components/ui/custom-pagination';
-import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const TypeDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: typeDetail, isLoading, isError } = useTypeDetail(id || '');
+  const { toast } = useToast();
+  const { data: typeDetail, isLoading, isError, error } = useTypeDetail(id || '');
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonPerPage] = useState(12);
   const [pokemonDetails, setPokemonDetails] = useState<any[]>([]);
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
   // Load Pokemon details when type data is available
-  React.useEffect(() => {
+  useEffect(() => {
     if (typeDetail) {
       const loadPokemonDetails = async () => {
         setIsLoadingDetails(true);
@@ -35,6 +36,11 @@ const TypeDetail = () => {
           setPokemonDetails(details);
         } catch (error) {
           console.error('Error fetching Pokemon details:', error);
+          toast({
+            title: "Error",
+            description: "Failed to load Pokémon details. Please try again.",
+            variant: "destructive"
+          });
         } finally {
           setIsLoadingDetails(false);
         }
@@ -42,10 +48,11 @@ const TypeDetail = () => {
       
       loadPokemonDetails();
     }
-  }, [typeDetail, currentPage, pokemonPerPage]);
+  }, [typeDetail, currentPage, pokemonPerPage, toast]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   if (isLoading || isLoadingDetails) {
@@ -54,7 +61,7 @@ const TypeDetail = () => {
         <Navbar />
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <div className="animate-rotate-slow">
+            <div className="animate-spin">
               <img 
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
                 alt="Loading"
@@ -75,8 +82,10 @@ const TypeDetail = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col items-center justify-center min-h-[60vh]">
             <h2 className="text-xl font-bold text-red-500">Error Loading Type</h2>
-            <p>Sorry, we couldn't load this Pokémon type.</p>
-            <p className="text-sm text-gray-600">Please try again later.</p>
+            <p className="text-gray-700">Sorry, we couldn't load this Pokémon type.</p>
+            <p className="text-sm text-gray-600 mt-2">
+              {error instanceof Error ? error.message : 'Please try again later.'}
+            </p>
           </div>
         </div>
       </div>
@@ -113,7 +122,7 @@ const TypeDetail = () => {
                   key={pokemon.id}
                   id={pokemon.id}
                   name={pokemon.name}
-                  image={pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}
+                  image={pokemon.sprites.other['official-artwork']?.front_default || pokemon.sprites.front_default}
                   types={pokemon.types.map((t: any) => t.type.name)}
                 />
               ))}

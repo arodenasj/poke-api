@@ -126,6 +126,29 @@ export const PokemonService = {
     }
   },
 
+  // Get Pokemon by type
+  getPokemonByType: async (type: string, limit = 100): Promise<PokemonListResponse> => {
+    try {
+      const typeDetail = await PokemonService.getTypeDetail(type);
+      
+      // Get the first 'limit' Pokemon of this type
+      const pokemonOfType = typeDetail.pokemon.slice(0, limit).map(p => ({
+        name: p.pokemon.name,
+        url: p.pokemon.url
+      }));
+      
+      return {
+        count: typeDetail.pokemon.length,
+        next: null,
+        previous: null,
+        results: pokemonOfType
+      };
+    } catch (error) {
+      console.error('Error fetching Pokemon by type:', error);
+      throw error;
+    }
+  },
+
   // Search Pokemon by name (partial match)
   searchPokemon: async (query: string, limit = 20): Promise<PokemonDetail[]> => {
     try {
