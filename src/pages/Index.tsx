@@ -192,7 +192,7 @@ const Index = () => {
                   textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
                 }}
             >
-              ¡La Base de Datos Pokémon Más Completa del Mundo!
+              Base de Datos Pokémon Completa
             </h2>
 
             {typeList && (
