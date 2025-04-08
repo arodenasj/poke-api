@@ -32,7 +32,7 @@ export function Navbar() {
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" 
                 alt="Pokedex Logo"
               />
-              <span className="ml-2 text-white font-bold text-xl"></span>
+              <span className="ml-2 text-white font-bold text-xl">Antonio Ródenas</span>
             </Link>
           </div>
           
