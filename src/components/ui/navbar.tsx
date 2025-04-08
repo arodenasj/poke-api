@@ -17,7 +17,12 @@ export function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img 
-                className="h-10 w-auto" 
+                className="h-8 w-auto mr-2" 
+                src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi.svg" 
+                alt="PokeAPI Logo"
+              />
+              <img 
+                className="h-10 w-auto ml-2" 
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" 
                 alt="Pokedex Logo"
               />

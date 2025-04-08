@@ -23,6 +23,12 @@ export interface PokemonDetail {
     other: {
       'official-artwork': {
         front_default: string;
+      },
+      'dream_world': {
+        front_default: string;
+      },
+      'home': {
+        front_default: string;
       }
     }
   };
@@ -63,15 +69,34 @@ export interface TypeListResponse {
   }[];
 }
 
+export interface DamageRelations {
+  double_damage_from: { name: string; url: string }[];
+  double_damage_to: { name: string; url: string }[];
+  half_damage_from: { name: string; url: string }[];
+  half_damage_to: { name: string; url: string }[];
+  no_damage_from: { name: string; url: string }[];
+  no_damage_to: { name: string; url: string }[];
+}
+
+export interface TypeMove {
+  name: string;
+  url: string;
+}
+
 export interface TypeDetail {
   id: number;
   name: string;
+  damage_relations: DamageRelations;
   pokemon: {
     pokemon: {
       name: string;
       url: string;
     };
     slot: number;
+  }[];
+  moves: {
+    name: string;
+    url: string;
   }[];
 }
 

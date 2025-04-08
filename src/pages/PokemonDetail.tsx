@@ -64,6 +64,26 @@ const PokemonDetail = () => {
   // Get official artwork if available, otherwise use front sprite
   const mainImage = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
 
+  // Function to render a sprite with a label if it exists
+  const renderSprite = (sprite: string | null | undefined, label: string) => {
+    if (!sprite) return null;
+    return (
+      <div className="flex flex-col items-center">
+        <div className="bg-gray-100 rounded-lg p-4">
+          <img 
+            src={sprite} 
+            alt={`${formattedName} ${label}`} 
+            className="w-24 h-24 mx-auto object-contain"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+        <p className="mt-2 text-sm text-center">{label}</p>
+      </div>
+    );
+  };
+
   return (
     <div>
       <Navbar />
@@ -186,57 +206,19 @@ const PokemonDetail = () => {
                 <TabsContent value="sprites" className="pt-4">
                   <Card>
                     <CardContent className="p-6">
-                      <h2 className="text-xl font-bold mb-4">Sprites</h2>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        <div className="flex flex-col items-center">
-                          <div className="bg-gray-100 rounded-lg p-4">
-                            <img 
-                              src={pokemon.sprites.front_default} 
-                              alt="Front Default" 
-                              className="w-24 h-24 mx-auto"
-                            />
-                          </div>
-                          <p className="mt-2 text-sm text-center">Front Default</p>
-                        </div>
-                        
-                        {pokemon.sprites.back_default && (
-                          <div className="flex flex-col items-center">
-                            <div className="bg-gray-100 rounded-lg p-4">
-                              <img 
-                                src={pokemon.sprites.back_default} 
-                                alt="Back Default" 
-                                className="w-24 h-24 mx-auto"
-                              />
-                            </div>
-                            <p className="mt-2 text-sm text-center">Back Default</p>
-                          </div>
-                        )}
-                        
-                        {pokemon.sprites.front_shiny && (
-                          <div className="flex flex-col items-center">
-                            <div className="bg-gray-100 rounded-lg p-4">
-                              <img 
-                                src={pokemon.sprites.front_shiny} 
-                                alt="Front Shiny" 
-                                className="w-24 h-24 mx-auto"
-                              />
-                            </div>
-                            <p className="mt-2 text-sm text-center">Front Shiny</p>
-                          </div>
-                        )}
-                        
-                        {pokemon.sprites.back_shiny && (
-                          <div className="flex flex-col items-center">
-                            <div className="bg-gray-100 rounded-lg p-4">
-                              <img 
-                                src={pokemon.sprites.back_shiny} 
-                                alt="Back Shiny" 
-                                className="w-24 h-24 mx-auto"
-                              />
-                            </div>
-                            <p className="mt-2 text-sm text-center">Back Shiny</p>
-                          </div>
-                        )}
+                      <h2 className="text-xl font-bold mb-4">Default Sprites</h2>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        {renderSprite(pokemon.sprites.front_default, "Front Default")}
+                        {renderSprite(pokemon.sprites.back_default, "Back Default")}
+                        {renderSprite(pokemon.sprites.front_shiny, "Front Shiny")}
+                        {renderSprite(pokemon.sprites.back_shiny, "Back Shiny")}
+                      </div>
+
+                      <h2 className="text-xl font-bold mb-4 mt-8">Special Artwork</h2>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                        {renderSprite(pokemon.sprites.other?.['official-artwork']?.front_default, "Official Artwork")}
+                        {renderSprite(pokemon.sprites.other?.['dream_world']?.front_default, "Dream World")}
+                        {renderSprite(pokemon.sprites.other?.['home']?.front_default, "Home")}
                       </div>
                     </CardContent>
                   </Card>

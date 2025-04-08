@@ -96,7 +96,10 @@ const TypeList = () => {
     <div>
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8 text-center">Pokémon Types</h1>
+        <div className="mb-8 bg-pokemon-red p-6 rounded-lg text-white">
+          <h1 className="text-3xl font-bold text-center">Pokémon Types</h1>
+          <p className="text-center mt-2">Select a type to see damage relations, Pokémon, and moves of that type</p>
+        </div>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {mainTypes.map((type) => (
@@ -111,6 +114,12 @@ const TypeList = () => {
               </Card>
             </Link>
           ))}
+        </div>
+        
+        <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+          <h2 className="text-xl font-bold mb-2">About Pokémon Types</h2>
+          <p>Pokémon types are attributes that determine a Pokémon's strengths and weaknesses in battle. Each type has unique properties that affect how much damage they deal to or receive from other types.</p>
+          <p className="mt-2">Click on any type above to see detailed information about damage relations, Pokémon of that type, and moves that belong to that type.</p>
         </div>
       </div>
     </div>
