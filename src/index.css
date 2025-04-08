@@ -1,10 +1,11 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 45 100% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -13,16 +14,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 40 100% 50%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 240 60% 60%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 0 90% 60%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -32,22 +33,15 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -61,16 +55,16 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 40 100% 50%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 240 60% 60%;
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 0 90% 60%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -97,5 +91,37 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
   }
+
+  .poke-card {
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .poke-card-hover {
+    @apply hover:scale-105 transition-transform duration-300;
+  }
+
+  .type-badge {
+    @apply inline-block rounded-full px-3 py-1 text-xs font-semibold text-white mr-2 mb-2;
+  }
+  
+  .type-normal { @apply bg-pokemon-normal; }
+  .type-fire { @apply bg-pokemon-fire; }
+  .type-water { @apply bg-pokemon-water; }
+  .type-electric { @apply bg-pokemon-electric; }
+  .type-grass { @apply bg-pokemon-grass; }
+  .type-ice { @apply bg-pokemon-ice; }
+  .type-fighting { @apply bg-pokemon-fighting; }
+  .type-poison { @apply bg-pokemon-poison; }
+  .type-ground { @apply bg-pokemon-ground; }
+  .type-flying { @apply bg-pokemon-flying; }
+  .type-psychic { @apply bg-pokemon-psychic; }
+  .type-bug { @apply bg-pokemon-bug; }
+  .type-rock { @apply bg-pokemon-rock; }
+  .type-ghost { @apply bg-pokemon-ghost; }
+  .type-dragon { @apply bg-pokemon-dragon; }
+  .type-dark { @apply bg-pokemon-dark; }
+  .type-steel { @apply bg-pokemon-steel; }
+  .type-fairy { @apply bg-pokemon-fairy; }
 }
