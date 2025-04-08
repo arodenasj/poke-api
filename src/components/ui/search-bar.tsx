@@ -32,7 +32,7 @@ export function SearchBar() {
   return (
     <div className="relative">
       <form onSubmit={handleSubmit} className="flex items-center">
-        <div className={`relative ${isExpanded ? 'w-60' : 'w-40'} transition-all duration-300`}>
+        <div className={`relative transition-all duration-300 ${isExpanded ? 'w-48 sm:w-60' : 'w-32 sm:w-40'}`}>
           <Input
             type="text"
             placeholder="Search Pokémon..."
@@ -47,13 +47,13 @@ export function SearchBar() {
               // Small delay to allow clicking on suggestions
               setTimeout(() => setShowSuggestions(false), 200);
             }}
-            className="rounded-l-md border-r-0 bg-white/80 pr-10 focus:bg-white"
+            className="rounded-l-md border-r-0 bg-white/80 pr-10 focus:bg-white text-sm h-9"
           />
         </div>
         <Button 
           type="submit" 
           variant="default" 
-          className="rounded-l-none bg-pokemon-yellow border-l-0 hover:bg-yellow-500"
+          className="rounded-l-none bg-pokemon-yellow border-l-0 hover:bg-yellow-500 h-9 px-2"
           size="icon"
         >
           <Search className="h-4 w-4" />

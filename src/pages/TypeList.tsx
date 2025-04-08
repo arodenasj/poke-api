@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTypeList } from '@/hooks/use-pokemon';
@@ -28,13 +27,12 @@ const typeColors = {
   fairy: "bg-pink-300",
 };
 
-// Componente para el ícono de tipo
+// Componente para el ícono de tipo con la ruta corregida
 const TypeIcon = ({ type }: { type: string }) => {
-  // Determinamos la URL de la imagen según el tipo
   return (
     <div className="flex items-center justify-center h-16 w-16 mb-2">
       <img 
-        src={`/images/types/${type}.png`}
+        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/${type}.png`}
         alt={`${type} type`}
         className="h-12 w-12 object-contain"
         onError={(e) => {

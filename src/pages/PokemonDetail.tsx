@@ -206,19 +206,108 @@ const PokemonDetail = () => {
                 <TabsContent value="sprites" className="pt-4">
                   <Card>
                     <CardContent className="p-6">
-                      <h2 className="text-xl font-bold mb-4">Default Sprites</h2>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                      <h2 className="text-xl font-bold mb-4">Official Artwork</h2>
+                      <div className="flex justify-center mb-6">
+                        <div className="bg-gray-100 rounded-lg p-4 max-w-xs">
+                          <img 
+                            src={pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}
+                            alt={`${formattedName} Official Artwork`}
+                            className="w-full h-auto object-contain"
+                            onError={(e) => {
+                              e.currentTarget.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png";
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <h2 className="text-xl font-bold mb-4">Showdown GIF (Animated)</h2>
+                      <div className="flex justify-center mb-6">
+                        <div className="bg-gray-100 rounded-lg p-4">
+                          <img 
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
+                            alt={`${formattedName} Animated`}
+                            className="h-24 mx-auto object-contain"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              e.currentTarget.parentElement?.insertAdjacentHTML('beforeend', 
+                                '<p class="text-sm text-gray-500">Animation not available</p>');
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <h2 className="text-xl font-bold mb-4 mt-8">Dream World (SVG)</h2>
+                      <div className="flex justify-center mb-6">
+                        <div className="bg-gray-100 rounded-lg p-4">
+                          <img 
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
+                            alt={`${formattedName} Dream World`}
+                            className="h-24 mx-auto object-contain"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              e.currentTarget.parentElement?.insertAdjacentHTML('beforeend', 
+                                '<p class="text-sm text-gray-500">SVG not available</p>');
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+                        <div>
+                          <h3 className="font-bold mb-2 text-center">Gold (Transparent PNG)</h3>
+                          <div className="bg-gray-100 rounded-lg p-4 flex justify-center">
+                            <img 
+                              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-ii/gold/transparent/${pokemon.id}.png`}
+                              alt={`${formattedName} Gold Version`}
+                              className="h-16 object-contain"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement?.insertAdjacentHTML('beforeend', 
+                                  '<p class="text-sm text-gray-500">Sprite not available</p>');
+                              }}
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h3 className="font-bold mb-2 text-center">Generation VI XY</h3>
+                          <div className="bg-gray-100 rounded-lg p-4 flex justify-center">
+                            <img 
+                              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vi/x-y/${pokemon.id}.png`}
+                              alt={`${formattedName} XY Version`}
+                              className="h-16 object-contain"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement?.insertAdjacentHTML('beforeend', 
+                                  '<p class="text-sm text-gray-500">Sprite not available</p>');
+                              }}
+                            />
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h3 className="font-bold mb-2 text-center">Gen I Yellow</h3>
+                          <div className="bg-gray-100 rounded-lg p-4 flex justify-center">
+                            <img 
+                              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/yellow/transparent/${pokemon.id}.png`}
+                              alt={`${formattedName} Yellow Version`}
+                              className="h-16 object-contain"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                                e.currentTarget.parentElement?.insertAdjacentHTML('beforeend', 
+                                  '<p class="text-sm text-gray-500">Sprite not available</p>');
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <h2 className="text-xl font-bold mb-4 mt-8">Default Sprites</h2>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
                         {renderSprite(pokemon.sprites.front_default, "Front Default")}
                         {renderSprite(pokemon.sprites.back_default, "Back Default")}
                         {renderSprite(pokemon.sprites.front_shiny, "Front Shiny")}
                         {renderSprite(pokemon.sprites.back_shiny, "Back Shiny")}
-                      </div>
-
-                      <h2 className="text-xl font-bold mb-4 mt-8">Special Artwork</h2>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {renderSprite(pokemon.sprites.other?.['official-artwork']?.front_default, "Official Artwork")}
-                        {renderSprite(pokemon.sprites.other?.['dream_world']?.front_default, "Dream World")}
-                        {renderSprite(pokemon.sprites.other?.['home']?.front_default, "Home")}
                       </div>
                     </CardContent>
                   </Card>
