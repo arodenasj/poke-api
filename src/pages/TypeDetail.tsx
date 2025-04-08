@@ -5,7 +5,7 @@ import { useTypeDetail } from '@/hooks/use-pokemon';
 import { PokemonService } from '@/services/pokemon-service';
 import { Navbar } from '@/components/ui/navbar';
 import { PokemonCard } from '@/components/ui/pokemon-card';
-import { Pagination } from '@/components/ui/pagination';
+import { CustomPagination } from '@/components/ui/custom-pagination';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
 
@@ -121,7 +121,7 @@ const TypeDetail = () => {
             
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center">
-                <Pagination 
+                <CustomPagination
                   totalPages={totalPages}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}

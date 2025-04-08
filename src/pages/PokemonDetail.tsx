@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Navbar } from '@/components/ui/navbar';
+import { cn } from '@/lib/utils';
 
 const PokemonDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -147,8 +148,7 @@ const PokemonDetail = () => {
                               <div className="col-span-8">
                                 <Progress 
                                   value={(stat.base_stat / 255) * 100} 
-                                  className="h-2" 
-                                  indicatorClassName={statColor} 
+                                  className={cn("h-2", statColor)}
                                 />
                               </div>
                             </div>

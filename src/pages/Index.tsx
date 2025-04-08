@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect } from 'react';
 import { usePokemonList } from '@/hooks/use-pokemon';
 import { PokemonCard } from '@/components/ui/pokemon-card';
 import { Navbar } from '@/components/ui/navbar';
-import { Pagination } from '@/components/ui/pagination';
+import { CustomPagination } from '@/components/ui/custom-pagination';
 import { Button } from '@/components/ui/button';
 import { PokemonService } from '@/services/pokemon-service';
 import { Input } from '@/components/ui/input';
@@ -25,20 +24,16 @@ const Index = () => {
   const [isLoadingDetails, setIsLoadingDetails] = useState(false);
   const [selectedType, setSelectedType] = useState('all');
   
-  // Calculate the offset based on the current page
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
   
-  // Fetch the Pokemon list
   const { 
     data: pokemonList, 
     isLoading: isLoadingList,
     isError: isListError
-  } = usePokemonList(151, 0); // Get the first 151 Pokémon (first generation)
+  } = usePokemonList(151, 0);
 
-  // Fetch the type list for filtering
   const { data: typeList } = useTypeList();
 
-  // Fetch detailed information for displayed Pokemon
   useEffect(() => {
     const fetchPokemonDetails = async () => {
       if (pokemonList) {
@@ -46,13 +41,11 @@ const Index = () => {
         
         let filteredPokemon = [...pokemonList.results];
         
-        // Apply type filter if selected
         if (selectedType !== 'all' && typeList) {
           try {
             const typeInfo = await PokemonService.getTypeDetail(selectedType);
             const pokemonOfType = typeInfo.pokemon.map(p => p.pokemon);
             
-            // Filter the Pokemon list to only include Pokemon of the selected type
             filteredPokemon = filteredPokemon.filter(p => 
               pokemonOfType.some(tp => tp.name === p.name)
             );
@@ -61,7 +54,6 @@ const Index = () => {
           }
         }
         
-        // Paginate the filtered results
         const paginatedPokemon = filteredPokemon.slice(offset, offset + ITEMS_PER_PAGE);
         
         try {
@@ -83,16 +75,14 @@ const Index = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    // Scroll to top when changing page
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleTypeChange = (value: string) => {
     setSelectedType(value);
-    setCurrentPage(1); // Reset to first page when changing type
+    setCurrentPage(1);
   };
 
-  // Calculate the total number of pages
   const totalPokemon = pokemonList ? (selectedType === 'all' ? pokemonList.results.length : pokemonDetails.length * (151 / ITEMS_PER_PAGE)) : 0;
   const totalPages = Math.ceil(totalPokemon / ITEMS_PER_PAGE);
 
@@ -186,7 +176,7 @@ const Index = () => {
             
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center">
-                <Pagination 
+                <CustomPagination
                   totalPages={totalPages}
                   currentPage={currentPage}
                   onPageChange={handlePageChange}
