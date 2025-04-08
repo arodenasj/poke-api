@@ -23,16 +23,16 @@ export function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img 
-                className="h-8 w-auto mr-2" 
+                className="h-10 w-auto mr-2"
                 src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi.svg" 
                 alt="PokeAPI Logo"
               />
               <img 
-                className="h-10 w-auto ml-2 hidden sm:block" 
+                className="h-10 w-auto ml-2 hidden sm:block"
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" 
                 alt="Pokedex Logo"
               />
-              <span className="ml-2 text-white font-bold text-xl">PokéLookup</span>
+              <span className="ml-2 text-white font-bold text-xl"></span>
             </Link>
           </div>
           
@@ -47,7 +47,7 @@ export function Navbar() {
                     : 'text-white/90 hover:bg-white/10 hover:text-white'
                 }`}
               >
-                Home
+                Inicio
               </Link>
               <Link 
                 to="/types" 
@@ -57,7 +57,7 @@ export function Navbar() {
                     : 'text-white/90 hover:bg-white/10 hover:text-white'
                 }`}
               >
-                Types
+                Tipos
               </Link>
             </div>
           </div>

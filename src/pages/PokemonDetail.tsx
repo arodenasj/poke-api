@@ -116,11 +116,11 @@ const PokemonDetail = () => {
                   
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div className="border rounded-md p-3">
-                      <p className="text-sm text-gray-500">Height</p>
+                      <p className="text-sm text-gray-500">Altura</p>
                       <p className="font-bold">{heightInMeters.toFixed(1)} m</p>
                     </div>
                     <div className="border rounded-md p-3">
-                      <p className="text-sm text-gray-500">Weight</p>
+                      <p className="text-sm text-gray-500">Peso</p>
                       <p className="font-bold">{weightInKg.toFixed(1)} kg</p>
                     </div>
                   </div>
@@ -131,9 +131,9 @@ const PokemonDetail = () => {
             <div className="w-full md:w-2/3">
               <Tabs defaultValue="stats" className="w-full">
                 <TabsList className="w-full grid grid-cols-3">
-                  <TabsTrigger value="stats">Stats</TabsTrigger>
-                  <TabsTrigger value="abilities">Abilities</TabsTrigger>
-                  <TabsTrigger value="sprites">Sprites</TabsTrigger>
+                  <TabsTrigger value="stats">Estadísticas</TabsTrigger>
+                  <TabsTrigger value="abilities">Habilidades</TabsTrigger>
+                  <TabsTrigger value="sprites">Imágenes</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="stats" className="pt-4">
@@ -146,11 +146,11 @@ const PokemonDetail = () => {
                           let statName = stat.stat.name;
                           switch (statName) {
                             case 'hp': statName = 'HP'; break;
-                            case 'attack': statName = 'Attack'; break;
-                            case 'defense': statName = 'Defense'; break;
+                            case 'attack': statName = 'Ataque'; break;
+                            case 'defense': statName = 'Defensa'; break;
                             case 'special-attack': statName = 'Sp. Atk'; break;
                             case 'special-defense': statName = 'Sp. Def'; break;
-                            case 'speed': statName = 'Speed'; break;
+                            case 'speed': statName = 'Velocidad'; break;
                             default: statName = statName.charAt(0).toUpperCase() + statName.slice(1);
                           }
                           
@@ -182,7 +182,7 @@ const PokemonDetail = () => {
                 <TabsContent value="abilities" className="pt-4">
                   <Card>
                     <CardContent className="p-6">
-                      <h2 className="text-xl font-bold mb-4">Abilities</h2>
+                      <h2 className="text-xl font-bold mb-4">Habilidades</h2>
                       <ul className="space-y-4">
                         {pokemon.abilities.map((ability) => (
                           <li key={ability.ability.name} className="border-b pb-2 last:border-0">
@@ -206,19 +206,7 @@ const PokemonDetail = () => {
                 <TabsContent value="sprites" className="pt-4">
                   <Card>
                     <CardContent className="p-6">
-                      <h2 className="text-xl font-bold mb-4">Official Artwork</h2>
-                      <div className="flex justify-center mb-6">
-                        <div className="bg-gray-100 rounded-lg p-4 max-w-xs">
-                          <img 
-                            src={pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default}
-                            alt={`${formattedName} Official Artwork`}
-                            className="w-full h-auto object-contain"
-                            onError={(e) => {
-                              e.currentTarget.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png";
-                            }}
-                          />
-                        </div>
-                      </div>
+
 
                       <h2 className="text-xl font-bold mb-4">Showdown GIF (Animated)</h2>
                       <div className="flex justify-center mb-6">
@@ -242,7 +230,7 @@ const PokemonDetail = () => {
                           <img 
                             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokemon.id}.svg`}
                             alt={`${formattedName} Dream World`}
-                            className="h-24 mx-auto object-contain"
+                            className="h-30 mx-auto object-contain"
                             onError={(e) => {
                               e.currentTarget.style.display = 'none';
                               e.currentTarget.parentElement?.insertAdjacentHTML('beforeend', 
